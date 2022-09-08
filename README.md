@@ -9,7 +9,7 @@
 
 # quadtree
 
-Generic [https://en.wikipedia.org/wiki/Quadtree](quadtree) for golang.
+[Quadtree](https://en.wikipedia.org/wiki/Quadtree) for golang.
 
 # features
 
