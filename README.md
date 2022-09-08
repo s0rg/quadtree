@@ -4,10 +4,8 @@
 [![Tag](https://img.shields.io/github/v/tag/s0rg/quadtree?sort=semver)](https://github.com/s0rg/quadtree/tags)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/s0rg/quadtree)](https://goreportcard.com/report/github.com/s0rg/quadtree)
-<!--
-[![Maintainability](https://api.codeclimate.com/v1/badges/d6759af1231bf4f60f70/maintainability)](https://codeclimate.com/github/s0rg/quadtree/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/d6759af1231bf4f60f70/test_coverage)](https://codeclimate.com/github/s0rg/quadtree/test_coverage)
--->
+[![Maintainability](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/maintainability)](https://codeclimate.com/github/s0rg/quadtree/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/test_coverage)](https://codeclimate.com/github/s0rg/quadtree/test_coverage)
 
 # quadtree
 
@@ -46,15 +44,17 @@ func main() {
     log.Println(val) // should print 1
 
     const (
-        searchX = 60.0
-        searchY = 60.0
-        distance = 35.0
+        searchX = 80.0
+        searchY = 80.0
+        distance = 20.0
         count = 2
     )
 
     tree.KNearest(searchX, searchY, distance, count, func(x, y, w, h float64, val int) {
 		log.Printf("(%f, %f, %f, %f) = %d", x, y, w, h, val)
 	})
+
+    // output: (90.000000, 90.000000, 5.000000, 8.000000) = 4
 }
 ```
 
