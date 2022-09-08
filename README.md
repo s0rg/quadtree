@@ -9,7 +9,7 @@
 
 # quadtree
 
-Generic quadtree for golang.
+Generic [https://en.wikipedia.org/wiki/Quadtree](quadtree) for golang.
 
 # features
 
@@ -28,13 +28,13 @@ import (
 
 func main() {
     // width, height and max depth for new tree
-	tree := quadtree.New[int](100, 100, 4)
+    tree := quadtree.New[int](100, 100, 4)
 
     // add some points
-	tree.Add(10, 10, 5, 5, 1)
-	tree.Add(15, 20, 10, 10, 2)
-	tree.Add(40, 10, 4, 4, 3)
-	tree.Add(90, 90, 5, 8, 4)
+    tree.Add(10, 10, 5, 5, 1)
+    tree.Add(15, 20, 10, 10, 2)
+    tree.Add(40, 10, 4, 4, 3)
+    tree.Add(90, 90, 5, 8, 4)
 
     val, ok := tree.Get(9, 9, 11, 11)
     if !ok {
@@ -51,8 +51,8 @@ func main() {
     )
 
     tree.KNearest(searchX, searchY, distance, count, func(x, y, w, h float64, val int) {
-		log.Printf("(%f, %f, %f, %f) = %d", x, y, w, h, val)
-	})
+        log.Printf("(%f, %f, %f, %f) = %d", x, y, w, h, val)
+    })
 
     // output: (90.000000, 90.000000, 5.000000, 8.000000) = 4
 }
@@ -62,13 +62,13 @@ func main() {
 ```
 pkg: github.com/s0rg/quadtree
 cpu: AMD Ryzen 5 5500U with Radeon Graphics
-BenchmarkNodeInsert1-12        	4119890	    302.1 ns/op	    139 B/op	      0 allocs/op
-BenchmarkNodeInsert10-12       	 314479	     3384 ns/op	   1237 B/op	      0 allocs/op
-BenchmarkNodeInsert100-12      	  33385	    33683 ns/op	  14128 B/op	      0 allocs/op
-BenchmarkNodeDel10-12          	  38428	    49986 ns/op	      0 B/op	      0 allocs/op
-BenchmarkNodeDel100-12         	  10000	   647607 ns/op	      0 B/op	      0 allocs/op
-BenchmarkNodeSearch10-12       	 375060	     3071 ns/op	      0 B/op	      0 allocs/op
-BenchmarkNodeSearch100-12      	  37975	    31457 ns/op	      0 B/op	      0 allocs/op
-BenchmarkTreeKNearest10-12     	 639724	     1842 ns/op	      0 B/op	      0 allocs/op
-BenchmarkTreeKNearest100-12    	  64370	    18922 ns/op	      0 B/op	      0 allocs/op
+BenchmarkNodeInsert1-12         4119890     302.1 ns/op     139 B/op          0 allocs/op
+BenchmarkNodeInsert10-12         314479      3384 ns/op    1237 B/op          0 allocs/op
+BenchmarkNodeInsert100-12         33385     33683 ns/op   14128 B/op          0 allocs/op
+BenchmarkNodeDel10-12             38428     49986 ns/op       0 B/op          0 allocs/op
+BenchmarkNodeDel100-12            10000    647607 ns/op       0 B/op          0 allocs/op
+BenchmarkNodeSearch10-12         375060      3071 ns/op       0 B/op          0 allocs/op
+BenchmarkNodeSearch100-12         37975     31457 ns/op       0 B/op          0 allocs/op
+BenchmarkTreeKNearest10-12       639724      1842 ns/op       0 B/op          0 allocs/op
+BenchmarkTreeKNearest100-12       64370     18922 ns/op       0 B/op          0 allocs/op
 ```
