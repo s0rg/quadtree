@@ -3,6 +3,7 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/s0rg/quadtree)](go.mod)
 [![Tag](https://img.shields.io/github/v/tag/s0rg/quadtree?sort=semver)](https://github.com/s0rg/quadtree/tags)
 
+[![CI](https://github.com/s0rg/quadtree/workflows/ci/badge.svg)](https://github.com/s0rg/quadtree/actions?query=workflow%3Aci)
 [![Go Report Card](https://goreportcard.com/badge/github.com/s0rg/quadtree)](https://goreportcard.com/report/github.com/s0rg/quadtree)
 [![Maintainability](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/maintainability)](https://codeclimate.com/github/s0rg/quadtree/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/test_coverage)](https://codeclimate.com/github/s0rg/quadtree/test_coverage)
@@ -28,15 +29,15 @@ import (
 
 func main() {
     // width, height and max depth for new tree
-    tree := quadtree.New[int](100, 100, 4)
+    tree := quadtree.New[int](100.0, 100.0, 4)
 
     // add some points
-    tree.Add(10, 10, 5, 5, 1)
-    tree.Add(15, 20, 10, 10, 2)
-    tree.Add(40, 10, 4, 4, 3)
-    tree.Add(90, 90, 5, 8, 4)
+    tree.Add(10.0, 10.0, 5.0, 5.0, 1)
+    tree.Add(15.0, 20.0, 10.0, 10.0, 2)
+    tree.Add(40.0, 10.0, 4.0, 4.0, 3)
+    tree.Add(90.0, 90.0, 5.0, 8.0, 4)
 
-    val, ok := tree.Get(9, 9, 11, 11)
+    val, ok := tree.Get(9.0, 9.0, 11.0, 11.0)
     if !ok {
         log.Fatal("not found")
     }
@@ -44,13 +45,11 @@ func main() {
     log.Println(val) // should print 1
 
     const (
-        searchX = 80.0
-        searchY = 80.0
         distance = 20.0
         count = 2
     )
 
-    tree.KNearest(searchX, searchY, distance, count, func(x, y, w, h float64, val int) {
+    tree.KNearest(80.0, 80.0, distance, count, func(x, y, w, h float64, val int) {
         log.Printf("(%f, %f, %f, %f) = %d", x, y, w, h, val)
     })
 
