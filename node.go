@@ -3,14 +3,14 @@ package quadtree
 const childCount = 4
 
 type item[T any] struct {
-	Rect  rect
 	Value T
+	Rect  rect
 }
 
 type node[T any] struct {
-	Rect   rect
 	Childs []*node[T]
 	Items  []item[T]
+	Rect   rect
 }
 
 func makeNode[T any](r rect) *node[T] {
