@@ -94,5 +94,6 @@ func (t *Tree[T]) KNearest(x, y, distance float64, k int, iter Iter[T]) {
 
 func dist2d(x1, y1, x2, y2 float64) (rv float64) {
 	dx, dy := x2-x1, y2-y1
+
 	return math.Sqrt(dx*dx + dy*dy)
 }
