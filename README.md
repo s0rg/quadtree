@@ -60,16 +60,21 @@ func main() {
 ```
 
 # benchmark
+
 ```
+goos: linux
+goarch: amd64
 pkg: github.com/s0rg/quadtree
 cpu: AMD Ryzen 5 5500U with Radeon Graphics
-BenchmarkNodeInsert1-12         4119890     302.1 ns/op     139 B/op          0 allocs/op
-BenchmarkNodeInsert10-12         314479      3384 ns/op    1237 B/op          0 allocs/op
-BenchmarkNodeInsert100-12         33385     33683 ns/op   14128 B/op          0 allocs/op
-BenchmarkNodeDel10-12             38428     49986 ns/op       0 B/op          0 allocs/op
-BenchmarkNodeDel100-12            10000    647607 ns/op       0 B/op          0 allocs/op
-BenchmarkNodeSearch10-12         375060      3071 ns/op       0 B/op          0 allocs/op
-BenchmarkNodeSearch100-12         37975     31457 ns/op       0 B/op          0 allocs/op
-BenchmarkTreeKNearest10-12       639724      1842 ns/op       0 B/op          0 allocs/op
-BenchmarkTreeKNearest100-12       64370     18922 ns/op       0 B/op          0 allocs/op
+BenchmarkNode/Insert-12             14974236      71.07 ns/op       249 B/op          0 allocs/op
+BenchmarkNode/Del-12                6415672       188.3 ns/op         0 B/op          0 allocs/op
+BenchmarkNode/Search-12             21702474      51.83 ns/op         0 B/op          0 allocs/op
+BenchmarkTree/Add-12                18840514      67.83 ns/op       241 B/op          0 allocs/op
+BenchmarkTree/Get-12                21204722      55.46 ns/op         0 B/op          0 allocs/op
+BenchmarkTree/Move-12               8061322       147.5 ns/op         0 B/op          0 allocs/op
+BenchmarkTree/ForEach-12            18723290      58.60 ns/op         0 B/op          0 allocs/op
+BenchmarkTree/KNearest-12           3595956       324.7 ns/op         0 B/op          0 allocs/op
+BenchmarkTree/Del-12                6234123       193.1 ns/op         0 B/op          0 allocs/op
+PASS
+ok      github.com/s0rg/quadtree    12.666s
 ```

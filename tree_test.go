@@ -1,7 +1,6 @@
 package quadtree
 
 import (
-	"math/rand"
 	"testing"
 )
 
@@ -141,36 +140,53 @@ func TestKNearest(t *testing.T) {
 	}
 }
 
-func BenchmarkTreeKNearest10(b *testing.B)  { benchmarkKNearestN(b, 10) }
-func BenchmarkTreeKNearest100(b *testing.B) { benchmarkKNearestN(b, 100) }
-
-func benchmarkKNearestN(b *testing.B, count int) {
-	b.Helper()
-
-	const maxSize = 10.0
-
-	rand.Seed(benchmarkSeed)
+func BenchmarkTree(b *testing.B) {
+	const (
+		benchmarkSide = 1000.0
+		maxSize       = 10.0
+	)
 
 	q := New[int](benchmarkSide, benchmarkSide, nodeTestDepth)
 
-	for i := 0; i < count; i++ {
-		rc := randRect(benchmarkSide-maxSize, maxSize)
-		q.Add(rc.X0, rc.Y0, rc.Width(), rc.Heigth(), i)
-	}
+	x, y := 1.0, 1.0
+	x2, y2 := 800.0, 800.0
 
 	b.ResetTimer()
 
-	for n := 0; n < b.N; n++ {
-		for i := 0; i < count; i++ {
-			b.StopTimer()
-
-			x, y := randPoint(maxSize)
-			dist := randFloat(1, maxSize)
-			k := int(randFloat(1, maxSize))
-
-			b.StartTimer()
-
-			q.KNearest(x, y, dist, k, func(_, _, _, _ float64, val int) {})
+	b.Run("Add", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			q.Add(x, y, maxSize, maxSize, n)
 		}
-	}
+	})
+
+	b.Run("Get", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			_, _ = q.Get(x, y, maxSize, maxSize)
+		}
+	})
+
+	b.Run("Move", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			_ = q.Move(x, y, x2, y2)
+			x, y, x2, y2 = x2, y2, x, y
+		}
+	})
+
+	b.Run("ForEach", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			q.ForEach(x, y, maxSize, maxSize, func(_, _, _, _ float64, val int) {})
+		}
+	})
+
+	b.Run("KNearest", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			q.KNearest(x, y, maxSize, int(maxSize), func(_, _, _, _ float64, val int) {})
+		}
+	})
+
+	b.Run("Del", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			_ = q.Del(x, y)
+		}
+	})
 }

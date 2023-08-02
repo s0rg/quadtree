@@ -130,107 +130,44 @@ func TestNodeDel(t *testing.T) {
 	})
 }
 
-const benchmarkSide = 1000.0
-
-var benchmarkSeed = time.Now().UnixNano()
-
-func BenchmarkNodeInsert1(b *testing.B)   { benchmarkInsertN(b, 1) }
-func BenchmarkNodeInsert10(b *testing.B)  { benchmarkInsertN(b, 10) }
-func BenchmarkNodeInsert100(b *testing.B) { benchmarkInsertN(b, 100) }
-
-func BenchmarkNodeDel10(b *testing.B)  { benchmarkDelN(b, 10) }
-func BenchmarkNodeDel100(b *testing.B) { benchmarkDelN(b, 100) }
-
-func BenchmarkNodeSearch10(b *testing.B)  { benchmarkSearchN(b, 10) }
-func BenchmarkNodeSearch100(b *testing.B) { benchmarkSearchN(b, 100) }
-
-func benchmarkInsertN(b *testing.B, count int) {
-	b.Helper()
-
-	const maxSize = 10.0
-
-	rand.Seed(benchmarkSeed)
+func BenchmarkNode(b *testing.B) {
+	const (
+		benchmarkSide = 1000.0
+		benchmarkSize = 100
+		maxSize       = 10.0
+	)
 
 	node := makeNode[int](rc(0, 0, benchmarkSide, benchmarkSide))
 	node.Grow(nodeTestDepth, 0)
 
-	b.ResetTimer()
-
-	for n := 0; n < b.N; n++ {
-		for i := 0; i < count; i++ {
-			b.StopTimer()
-
-			rc := randRect(benchmarkSide-maxSize, maxSize)
-
-			b.StartTimer()
-
-			node.Insert(rc, i)
-		}
-	}
-}
-
-func benchmarkDelN(b *testing.B, count int) {
-	b.Helper()
-
-	const maxSize = 10.0
-
-	rand.Seed(benchmarkSeed)
-
-	node := makeNode[int](rc(0, 0, benchmarkSide, benchmarkSide))
-	node.Grow(nodeTestDepth, 0)
+	rc := randRect(benchmarkSide-maxSize, maxSize)
+	x, y := randPoint(benchmarkSide - maxSize)
 
 	b.ResetTimer()
 
-	for n := 0; n < b.N; n++ {
-		b.StopTimer()
-
-		for i := 0; i < count; i++ {
-			rc := randRect(benchmarkSide-maxSize, maxSize)
-			node.Insert(rc, i)
+	b.Run("Insert", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
+			node.Insert(rc, n)
 		}
+	})
 
-		for i := 0; i < count; i++ {
-			x, y := randPoint(benchmarkSide - maxSize)
-
-			b.StartTimer()
+	b.Run("Del", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
 			node.Del(x, y)
-			b.StopTimer()
 		}
-	}
-}
+	})
 
-func benchmarkSearchN(b *testing.B, count int) {
-	b.Helper()
-
-	const maxSize = 10.0
-
-	rand.Seed(benchmarkSeed)
-
-	node := makeNode[int](rc(0, 0, benchmarkSide, benchmarkSide))
-	node.Grow(nodeTestDepth, 0)
-
-	for i := 0; i < count; i++ {
-		rc := randRect(benchmarkSide-maxSize, maxSize)
-		node.Insert(rc, i)
-	}
-
-	b.ResetTimer()
-
-	for n := 0; n < b.N; n++ {
-		for i := 0; i < count; i++ {
-			b.StopTimer()
-
-			rc := randRect(benchmarkSide-maxSize, maxSize)
-
-			b.StartTimer()
-
+	b.Run("Search", func(b *testing.B) {
+		for n := 0; n < b.N; n++ {
 			node.Search(rc, func(_ *item[int]) bool { return false })
 		}
-	}
+	})
 }
 
+var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
+
 func randFloat(min, max float64) (rv float64) {
-	return min + (rand.Float64() * (max - min))
+	return min + (rng.Float64() * (max - min))
 }
 
 func randRect(maxPos, maxSide float64) (r rect) {
