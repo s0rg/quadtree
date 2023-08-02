@@ -13,6 +13,7 @@ linters:
   disable:
     - nonamedreturns
     - testpackage
+    - structcheck
     - varnamelen
     - ireturn
     - gofumpt
