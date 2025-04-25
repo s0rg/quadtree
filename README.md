@@ -6,8 +6,8 @@
 
 [![CI](https://github.com/s0rg/quadtree/workflows/ci/badge.svg)](https://github.com/s0rg/quadtree/actions?query=workflow%3Aci)
 [![Go Report Card](https://goreportcard.com/badge/github.com/s0rg/quadtree)](https://goreportcard.com/report/github.com/s0rg/quadtree)
-[![Maintainability](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/maintainability)](https://codeclimate.com/github/s0rg/quadtree/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/93e2a0c67fbe20b50321/test_coverage)](https://codeclimate.com/github/s0rg/quadtree/test_coverage)
+[![Maintainability](https://qlty.sh/badges/ae1e81be-3dc3-4cf6-ae43-cd4b1344e765/maintainability.svg)](https://qlty.sh/gh/s0rg/projects/quadtree)
+[![Code Coverage](https://qlty.sh/badges/ae1e81be-3dc3-4cf6-ae43-cd4b1344e765/test_coverage.svg)](https://qlty.sh/gh/s0rg/projects/quadtree)
 ![Issues](https://img.shields.io/github/issues/s0rg/quadtree)
 
 # quadtree

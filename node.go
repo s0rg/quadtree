@@ -20,8 +20,8 @@ func makeNode[T any](r rect) *node[T] {
 	}
 }
 
-func (n *node[T]) Grow(max, cur int) {
-	if cur > max {
+func (n *node[T]) Grow(want, cur int) {
+	if cur > want {
 		return
 	}
 
@@ -29,7 +29,7 @@ func (n *node[T]) Grow(max, cur int) {
 
 	for i, r := range n.Rect.Split() {
 		n.Childs[i] = makeNode[T](r)
-		n.Childs[i].Grow(max, cur+1)
+		n.Childs[i].Grow(want, cur+1)
 	}
 }
 

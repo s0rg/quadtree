@@ -166,8 +166,8 @@ func BenchmarkNode(b *testing.B) {
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
-func randFloat(min, max float64) (rv float64) {
-	return min + (rng.Float64() * (max - min))
+func randFloat(_min, _max float64) (rv float64) {
+	return _min + (rng.Float64() * (_max - _min))
 }
 
 func randRect(maxPos, maxSide float64) (r rect) {
