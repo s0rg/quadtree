@@ -174,13 +174,13 @@ func BenchmarkTree(b *testing.B) {
 
 	b.Run("ForEach", func(b *testing.B) {
 		for n := 0; n < b.N; n++ {
-			q.ForEach(x, y, maxSize, maxSize, func(_, _, _, _ float64, val int) {})
+			q.ForEach(x, y, maxSize, maxSize, func(_, _, _, _ float64, _ int) {})
 		}
 	})
 
 	b.Run("KNearest", func(b *testing.B) {
 		for n := 0; n < b.N; n++ {
-			q.KNearest(x, y, maxSize, int(maxSize), func(_, _, _, _ float64, val int) {})
+			q.KNearest(x, y, maxSize, int(maxSize), func(_, _, _, _ float64, _ int) {})
 		}
 	})
 
